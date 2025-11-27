@@ -2,31 +2,44 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Video</title>
+    <title>Clickbait Video Fullscreen</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-        }
-        .video-container {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         video {
-            max-width: 600px;
-            border: 2px solid #333;
+            max-width: 100%;
+            max-height: 100%;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Clicca sul video per guardare!</h1>
-
-    <video controls width="600"
-           poster="https://base44.app/api/apps/68da73a2a7d7da585c5bfa87/files/public/68da73a2a7d7da585c5bfa87/592235c2d_freerbx.jpg">
+    <video id="video" poster="https://base44.app/api/apps/68da73a2a7d7da585c5bfa87/files/public/68da73a2a7d7da585c5bfa87/592235c2d_freerbx.jpg" controls>
         <source src="https://base44.app/api/apps/68da73a2a7d7da585c5bfa87/files/public/68da73a2a7d7da585c5bfa87/7c8939422_INTRO.mp4" type="video/mp4">
         Il tuo browser non supporta il video.
     </video>
+
+    <script>
+        const video = document.getElementById('video');
+
+        // Parte in autoplay quando l'utente clicca sul poster
+        video.addEventListener('click', () => {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();   // richiede fullscreen
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen(); // Safari
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen(); // IE/Edge
+            }
+            video.play();  // parte il video
+        });
+    </script>
 </body>
 </html>
